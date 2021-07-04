@@ -1,5 +1,6 @@
-let allBox = document.querySelector(".box");
-
+function randomNo(max) {
+  return Math.floor(Math.random() * max);
+}
 function getRandomColor() {
   let hexaChar = [
     "0",
@@ -23,15 +24,31 @@ function getRandomColor() {
   let color = "#";
 
   for (let i = 0; i < 6; i++) {
-    let randomNumber = Math.floor(Math.random() * 16);
+    let randomNumber = randomNo(16);
     color += hexaChar[randomNumber];
   }
   return color;
 }
-function handleClick() {
+
+let parentBox = document.querySelector(".box");
+// let conta = document.querySelector("conatiner");
+// conta.classList.add("flex");
+for (let i = 0; i <= 500; i++) {
+  let div = document.createElement("div");
+  div.classList.add("box");
+
+  let h3 = document.createElement("h3");
+  h3.innerText = randomNo(500);
+
+  div.append(h3);
+  parentBox.append(div);
+}
+let allBox = document.querySelectorAll(".box");
+
+function handleMouseMove() {
   allBox.forEach((box) => {
-    return;
+    box.style.backgroundColor = getRandomColor();
+    box.querySelector("h3").innerText = randomNo(500);
   });
 }
-
-allBox.addEventListener("mousemove", handleClick);
+parentBox.addEventListener("mousemove", handleMouseMove);
